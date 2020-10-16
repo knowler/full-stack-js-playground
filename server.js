@@ -3,8 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const {ApolloServer, gql} = require('apollo-server');
-const {createElement} = require('react');
-const ReactDOMServer = require('react-dom/server');
 
 require('@babel/register');
 
