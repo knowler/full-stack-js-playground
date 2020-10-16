@@ -4,6 +4,17 @@ const fs = require('fs');
 const webpack = require('webpack');
 const {ApolloServer, gql} = require('apollo-server');
 
+const pages = [
+  {
+    title: 'Home',
+    description: 'Home sweet home...',
+  },
+  {
+    title: 'Contact',
+    description: 'Get in touch!',
+  },
+];
+
 // Define Apollo Server
 
 const apolloServer = new ApolloServer({
@@ -22,6 +33,10 @@ const apolloServer = new ApolloServer({
       posts: [Post]
       pages: [Page]
     }
+
+    type Mutation {
+      createPage(title: String!, description: String!): Page
+    }
   `,
   resolvers: {
     Query: {
@@ -35,16 +50,10 @@ const apolloServer = new ApolloServer({
           author: 'Nathan Knowler',
         },
       ],
-      pages: () => [
-        {
-          title: 'Home',
-          description: 'Home sweet home...',
-        },
-        {
-          title: 'Contact',
-          description: 'Get in touch!',
-        },
-      ],
+      pages: () => pages,
+    },
+    Mutation: {
+      createPage: (_, page) => pages[pages.push(page) - 1],
     },
   },
 });
@@ -98,7 +107,7 @@ const server = http.createServer((req, res) => {
 
 webpack(
   {
-    mode: 'development',
+    mode: process.env.NODE_ENV,
     entry: {
       client: './client.js',
     },
@@ -114,6 +123,11 @@ webpack(
         },
       ],
     },
+    plugins: [
+      new webpack.DefinePlugin({
+        __DEV__: process.env.NODE_ENV !== 'production',
+      }),
+    ],
   },
   (err, stats) => {
     if (err) {
