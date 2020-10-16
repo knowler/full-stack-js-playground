@@ -5,9 +5,9 @@ import {Loading} from './Loading';
 
 const PAGES = gql`
   query {
-    posts {
+    pages {
       title
-      author
+      description
     }
   }
 `;
