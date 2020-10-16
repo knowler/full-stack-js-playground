@@ -13,7 +13,7 @@ const PAGES = gql`
 `;
 
 export function Pages() {
-  const {loading, error, data} = useQuery(PAGES);
+  const {loading, error, data, refetch} = useQuery(PAGES);
 
   return (
     <div style={{width: '50vw'}}>
@@ -23,20 +23,30 @@ export function Pages() {
       ) : error ? (
         <ErrorMessage />
       ) : data.pages ? (
-        <ul>
-          {data.pages.map((page) => (
-            <li key={page.title}>
-              <article>
-                <header>
-                  <h2>{page.title}</h2>
-                </header>
-                <p>{page.description}</p>
-              </article>
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul>
+            {data.pages.map((page) => (
+              <li key={page.title}>
+                <article>
+                  <header>
+                    <h2>{page.title}</h2>
+                  </header>
+                  <p>{page.description}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+          <button type="button" onClick={() => refetch()}>
+            Load more
+          </button>
+        </>
       ) : (
-        <p>No pages found. Come again.</p>
+        <>
+          <p>No pages found. Come again.</p>
+          <button type="button" onClick={() => refetch()}>
+            Retry
+          </button>
+        </>
       )}
     </div>
   );
