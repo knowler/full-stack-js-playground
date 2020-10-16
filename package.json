@@ -1,0 +1,19 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.2.4",
+    "@babel/core": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-react": "^7.12.1",
+    "apollo-server": "^2.18.2",
+    "babel-loader": "^8.1.0",
+    "graphql": "^15.3.0",
+    "nodemon": "^2.0.5",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "webpack": "^5.1.2"
+  }
+}
