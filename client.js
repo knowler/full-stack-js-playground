@@ -3,6 +3,8 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 
 import {Pages, Posts} from './components';
 
+import './client.css';
+
 const client = new ApolloClient({
   uri: 'http://localhost:4000',
   cache: new InMemoryCache(),

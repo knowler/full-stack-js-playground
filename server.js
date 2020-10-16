@@ -3,6 +3,12 @@ const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
 const {ApolloServer, gql} = require('apollo-server');
+const {createElement} = require('react');
+const ReactDOMServer = require('react-dom/server');
+
+require('@babel/register');
+
+const {html} = require('./document');
 
 const pages = [
   {
@@ -58,23 +64,6 @@ const apolloServer = new ApolloServer({
   },
 });
 
-// Base HTML page
-
-const html = `
-<!doctype html>
-<html lang="en-ca">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Hello, World!</title>
-    <script src="/client.js" defer></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
-`.trim();
-
 // Define App Server
 
 const server = http.createServer((req, res) => {
@@ -120,6 +109,10 @@ webpack(
         {
           test: /\.js/,
           use: 'babel-loader',
+        },
+        {
+          test: /\.css$/,
+          use: ['style-loader', 'css-loader'],
         },
       ],
     },
