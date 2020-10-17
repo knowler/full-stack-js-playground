@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "build:{client,server}",
+    "build": "run-p build:{client,server}",
     "build:client": "webpack -c client/webpack.config.js",
     "build:server": "tsc -p server",
     "start": "node build/server",
@@ -9,8 +9,14 @@
     "production": "cross-env NODE_ENV=production run-s build start"
   },
   "dependencies": {
+    "@apollo/client": "^3.2.4",
+    "@types/mime-types": "^2.1.0",
     "@types/node": "^14.11.10",
+    "apollo-server": "^2.18.2",
     "cross-env": "^7.0.2",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
+    "mime-types": "^2.1.27",
     "npm-run-all": "^4.1.5",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
